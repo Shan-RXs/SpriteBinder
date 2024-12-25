@@ -11,15 +11,40 @@ SpriteBinder allows you to easily manage and combine multiple individual sprites
 
 ## Table of Contents
 - [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
 - [License](#license)
-- [Acknowledgements](#acknowledgements)
 
 ## Installation
-To install SpriteBinder, clone the repository and install the dependencies:
+
+To get started, follow the instructions below to install the necessary libraries and build the project.
+
+### Step 1: Install Dependencies
+
+First, you'll need to install the required Python libraries. You can do this using `pip`.
+
+#### Install pillow
+pillow is a popular Python Imaging Library used for image processing.
 
 ```bash
-git clone https://github.com/yourusername/spritebinder.git
-cd spritebinder
-npm install
+pip install pillow
+
+#### Install pyinstaller
+To build executable
+
+```bash
+pip install pyinstaller
+
+### Step 2: Clone repository and go to main.py directory of the clone.
+
+```bash
+cd src
+
+### Step 3: Run this command to build executable. In linux icon is ignoring.
+
+```bash
+pyinstaller --onefile --icon=Icon.ico main.py
+
+### Step 4: Run the executable
+./dist/main
+
+
+
