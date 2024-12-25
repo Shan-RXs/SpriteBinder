@@ -5,8 +5,8 @@ from PIL import Image, ImageTk
 class ImageBinder:
     def __init__(self, root):
         self.root = root
-        self.root.title("Image Combiner")
-        self.root.geometry("600x500")
+        self.root.title("SpriteBinder")
+        self.root.geometry("1280x720")
 
         # Frame for canvas and vertical scroll bar
         self.canvas_frame = tk.Frame(root)
