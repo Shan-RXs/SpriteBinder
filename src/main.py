@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import filedialog, messagebox
 from PIL import Image, ImageTk
 
-class ImageBinder:
+class SpriteBinder:
     def __init__(self, root):
         self.root = root
         self.root.title("SpriteBinder")
@@ -204,7 +204,7 @@ class ImageBinder:
 root = tk.Tk()
 
 # Create an instance of the ImageCombinerApp
-app = ImageBinder(root)
+app = SpriteBinder(root)
 
 # Start the Tkinter event loop
 root.mainloop()
