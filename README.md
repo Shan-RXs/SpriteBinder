@@ -11,7 +11,6 @@ SpriteBinder allows you to easily manage and combine multiple individual sprites
 
 ## Table of Contents
 - [Installation](#installation)
-- [License](#license)
 
 ## Installation
 Make sure you have python3 installed.
