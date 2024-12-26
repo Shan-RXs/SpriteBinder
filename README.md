@@ -22,28 +22,30 @@ First, you'll need to install the required Python libraries. You can do this usi
 
 #### Install pillow
 pillow is a popular Python Imaging Library used for image processing.
-
 ```bash
 pip install pillow
+```
 
 #### Install pyinstaller
 To build executable
-
 ```bash
 pip install pyinstaller
+```
 
 ### Step 2: Clone repository and go to main.py directory of the clone.
 
 ```bash
-cd src
+cd SpriteBinder/src
+```
 
 ### Step 3: Run this command to build executable. In linux icon is ignoring.
-
 ```bash
 pyinstaller --onefile --icon=Icon.ico main.py
+```
 
 ### Step 4: Run the executable
+```bash
 ./dist/main
-
+```
 
 
