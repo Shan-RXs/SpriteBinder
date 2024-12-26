@@ -1,3 +1,5 @@
+import os
+import platform
 import tkinter as tk
 from tkinter import filedialog, messagebox
 from PIL import Image, ImageTk
@@ -84,11 +86,40 @@ class SpriteBinder:
             self.canvas.yview_scroll(-1, "units")
         elif event.num == 5 or event.delta < 0:  # Scroll down
             self.canvas.yview_scroll(1, "units")
+    
+    def get_pictures_directory(self):
+        system = platform.system()
+        if system == "Windows":
+            user_profile = os.environ.get("USERPROFILE")
+            # Get the USERPROFILE environment variable safely
+            if user_profile:
+                pictures_dir = os.path.join(user_profile, "Pictures")
+                if os.path.exists(pictures_dir):
+                    return pictures_dir
+                else:
+                    # Fallback if Pictures folder does not exist
+                    return user_profile
+            else:
+                # Fallback if USERPROFILE is not set
+                return os.path.expanduser("~")
+            
+        elif system == "Linux":
+            xdg_pictures_dir = os.path.join(os.path.expanduser("~"), "Pictures")
+            if os.path.exists(xdg_pictures_dir):
+                return xdg_pictures_dir
+            else:
+                return os.path.expanduser("~")
+        else:
+            # Default to the user's home directory if the OS is not recognized
+            return os.path.expanduser("~")
 
     def select_images(self):
+        initial_directory = self.get_pictures_directory()
         file_paths = filedialog.askopenfilenames(
             title="Select Images", 
             filetypes=[("PNG files", "*.png"), ("JPEG files", "*.jpg;*.jpeg")],
+            initialdir= initial_directory
+            
         )
         
         if file_paths:
