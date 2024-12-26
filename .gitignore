@@ -10,3 +10,5 @@ ENV/
 
 # Ignore all .png files
 *.png
+
+*.json

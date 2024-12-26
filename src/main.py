@@ -1,3 +1,4 @@
+import json
 import os
 import platform
 import tkinter as tk
@@ -112,18 +113,36 @@ class SpriteBinder:
         else:
             # Default to the user's home directory if the OS is not recognized
             return os.path.expanduser("~")
+        
+    def save_last_used_directory(self, directory):
+        config = {"last_used_directory": directory}
+        with open("config.json", "w") as config_file:
+            json.dump(config, config_file)
+        
+    def get_last_used_directory(self):
+        try:
+            with open("config.json", "r") as config_file:
+                config = json.load(config_file)
+                return config.get("last_used_directory", self.get_pictures_directory())
+        except (FileNotFoundError, json.JSONDecodeError):
+            return self.get_pictures_directory()  # Default to Pictures directory
+
 
     def select_images(self):
         initial_directory = self.get_pictures_directory()
         file_paths = filedialog.askopenfilenames(
             title="Select Images", 
             filetypes=[("PNG files", "*.png"), ("JPEG files", "*.jpg;*.jpeg")],
-            initialdir= initial_directory
+            initialdir=self.get_last_used_directory()
             
         )
         
         if file_paths:
-            self.images = [Image.open(path) for path in file_paths]  # Open the images
+            self.save_last_used_directory(os.path.dirname(file_paths[0]))
+            try:
+                self.images = [Image.open(path) for path in file_paths]
+            except Exception as e:
+                messagebox.showerror("Error", f"Failed to load image: {e}")
             self.image_names = [path.split("/")[-1] for path in file_paths]  # Extract image names
             self.display_images()
             self.update_image_list()
@@ -193,7 +212,8 @@ class SpriteBinder:
         save_path = filedialog.asksaveasfilename(
             title="Save Image As", 
             defaultextension=".png",
-            filetypes=[("PNG files", "*.png"), ("JPEG files", "*.jpg;*.jpeg")]
+            filetypes=[("PNG files", "*.png"), ("JPEG files", "*.jpg;*.jpeg")],
+            initialdir=self.get_last_used_directory()
         )
         
         if save_path:
