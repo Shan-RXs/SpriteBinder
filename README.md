@@ -40,7 +40,7 @@ cd SpriteBinder/src
 
 ### Step 3: Run this command to build executable. In linux icon is ignoring.
 ```bash
-yinstaller --onefile --icon=Icon.ico --hidden-import='PIL._tkinter_finder' main.py
+pyinstaller --onefile --icon=Icon.ico --hidden-import='PIL._tkinter_finder' main.py
 ```
 
 ### Step 4: Run the executable
